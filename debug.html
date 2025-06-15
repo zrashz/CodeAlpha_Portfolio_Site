@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug-container { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Image Debug Page</h1>
+    
+    <div class="debug-container">
+        <h2>Testing image: my1.jpg</h2>
+        <p>Root directory:</p>
+        <img src="my1.jpg" alt="Test 1" 
+             onload="this.parentNode.innerHTML += '<p class=\'success\'>SUCCESS: Image loaded!</p>'" 
+             onerror="this.parentNode.innerHTML += '<p class=\'error\'>ERROR: Image failed to load!</p>'">
+        
+        <p>Images directory:</p>
+        <img src="images/my1.jpg" alt="Test 2" 
+             onload="this.parentNode.innerHTML += '<p class=\'success\'>SUCCESS: Image loaded!</p>'" 
+             onerror="this.parentNode.innerHTML += '<p class=\'error\'>ERROR: Image failed to load!</p>'">
+    </div>
+    
+    <div class="debug-container">
+        <h2>Testing alternative names</h2>
+        <p>me.jpg:</p>
+        <img src="images/me.jpg" alt="Test 3" 
+             onload="this.parentNode.innerHTML += '<p class=\'success\'>SUCCESS: Image loaded!</p>'" 
+             onerror="this.parentNode.innerHTML += '<p class=\'error\'>ERROR: Image failed to load!</p>'">
+        
+        <p>profile.jpg:</p>
+        <img src="images/profile.jpg" alt="Test 4" 
+             onload="this.parentNode.innerHTML += '<p class=\'success\'>SUCCESS: Image loaded!</p>'" 
+             onerror="this.parentNode.innerHTML += '<p class=\'error\'>ERROR: Image failed to load!</p>'">
+    </div>
+    
+    <script>
+        // List available files in images directory
+        console.log("Attempting to list files in images directory...");
+        
+        // Display browser info for debugging
+        document.write('<div class="debug-container"><h2>Browser Information</h2><pre>' + 
+                      'User Agent: ' + navigator.userAgent + '\n' +
+                      'Platform: ' + navigator.platform + 
+                      '</pre></div>');
+    </script>
+</body>
+</html>

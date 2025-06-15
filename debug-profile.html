@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Image Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-container { 
+            margin-bottom: 30px; 
+            padding: 20px; 
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 50%;
+            margin: 10px 0;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Profile Image Debug Page</h1>
+    
+    <div class="test-container">
+        <h2>Base64 Embedded Image Test</h2>
+        <p>This SVG image is embedded directly in the code and should always display:</p>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNmMGYwZjAiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMDAiIHI9IjUwIiBmaWxsPSIjY2NjY2NjIi8+PHBhdGggZD0iTTUwLDIwMCBDNTAsMjAwIDE1MCwxNTAgMjUwLDIwMCBMMjUwLDI5MCBMNTAsMjkwIFoiIGZpbGw9IiNjY2NjY2MiLz48L3N2Zz4=" 
+             alt="Base64 SVG Profile Image">
+        <p class="success">This is a placeholder image that always works!</p>
+    </div>
+
+    <div class="test-container">
+        <h2>File Copy Tool</h2>
+        <p>Click the button below to attempt to copy my2.jpg to my1.jpg:</p>
+        <button id="copyBtn">Copy my2.jpg to my1.jpg</button>
+        <p id="copyResult"></p>
+        
+        <script>
+            document.getElementById('copyBtn').addEventListener('click', function() {
+                // Create a simulated file copy attempt using fetch
+                fetch('images/my2.jpg')
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const status = document.getElementById('copyResult');
+                        status.textContent = 'Successfully loaded my2.jpg, this could be used as my1.jpg';
+                        status.className = 'success';
+                        
+                        // Create an object URL and display the image
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(blob);
+                        img.alt = 'my2.jpg preview';
+                        status.parentNode.appendChild(img);
+                    })
+                    .catch(error => {
+                        const status = document.getElementById('copyResult');
+                        status.textContent = 'Error loading my2.jpg: ' + error.message;
+                        status.className = 'error';
+                    });
+            });
+        </script>
+    </div>
+</body>
+</html>
